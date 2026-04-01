@@ -1,0 +1,63 @@
+import type { FactDefinition } from '../types'
+
+export const FACT_DEFINITIONS: FactDefinition[] = [
+  { name: 'Zalopay ID', label: 'Zalopay ID', value_type: 'text' },
+  { name: '2 số cuối Zalopay ID', label: '2 số cuối Zalopay ID', value_type: 'text' },
+  { name: 'Bank code', label: 'Bank Code', value_type: 'dropdown', options: ['CATHAY', 'MSB', 'VPB', 'TCB', 'VIB', 'BIDV', 'VCB', 'ACB', 'MBB'] },
+  { name: 'Os', label: 'Hệ điều hành', value_type: 'dropdown', options: ['IOS', 'ANDROID'] },
+  { name: 'Platform', label: 'Platform', value_type: 'dropdown', options: ['ZPA', 'ZPI'] },
+  { name: 'App version', label: 'App Version', value_type: 'text' },
+  { name: 'Raw URL Query', label: 'Raw URL Query', value_type: 'text' },
+  { name: 'User age', label: 'Tuổi user', value_type: 'number' },
+  { name: 'User current city', label: 'Thành phố hiện tại', value_type: 'dropdown', options: ['Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Quảng Ngãi', 'Bình Định', 'Phú Yên', 'Khánh Hòa', 'Nghệ An'] },
+  { name: 'User permanent city', label: 'Thành phố thường trú', value_type: 'dropdown', options: ['Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Quảng Ngãi', 'Bình Định', 'Phú Yên', 'Khánh Hòa', 'Nghệ An'] },
+  // PRD §4.x: fact này bị thiếu — city suy luận theo hành vi user
+  { name: 'User inferred permanent city', label: 'Thành phố thường trú (suy luận)', value_type: 'dropdown', options: ['Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Quảng Ngãi', 'Bình Định', 'Phú Yên', 'Khánh Hòa', 'Nghệ An'] },
+  { name: 'Bank OAO status active', label: 'Bank OAO Status Active', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'User ekyc status', label: 'User eKYC Status', value_type: 'dropdown', options: ['completed', 'pending', 'failed'] },
+  { name: 'User kyc level', label: 'User KYC Level', value_type: 'number' },
+  { name: 'User nationality', label: 'Quốc tịch', value_type: 'dropdown', options: ['VN', 'OTHER'] },
+  { name: 'User nfc status', label: 'User NFC Status', value_type: 'dropdown', options: ['enabled', 'disabled'] },
+  { name: 'User gender', label: 'Giới tính', value_type: 'dropdown', options: ['male', 'female', 'other'] },
+  { name: 'User has map bank', label: 'User Đã Liên Kết Bank', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'User identity type', label: 'Loại Giấy Tờ', value_type: 'dropdown', options: ['CCCD', 'CMT'] },
+  { name: 'NBA label', label: 'NBA Label', value_type: 'text' },
+  { name: 'transaction_frequency', label: 'Tần Suất Giao Dịch', value_type: 'dropdown', options: ['low', 'medium', 'high'] },
+  { name: 'transaction_value_percentile', label: 'Transaction Value Percentile', value_type: 'number' },
+  { name: 'transaction_trend', label: 'Xu Hướng Giao Dịch', value_type: 'dropdown', options: ['increasing', 'stable', 'decreasing', 'spike'] },
+  { name: 'avg_wallet_balance', label: 'Mức Số Dư Ví TB', value_type: 'dropdown', options: ['low', 'medium', 'high'] },
+  { name: 'wallet_balance_volatility', label: 'Biến Động Số Dư', value_type: 'dropdown', options: ['low', 'medium', 'high'] },
+  { name: 'balance_drop_frequency', label: 'Tần Suất Số Dư Giảm', value_type: 'dropdown', options: ['low', 'medium', 'high'] },
+  { name: 'recurring_inflow_detected', label: 'Phát Hiện Thu Nhập Định Kỳ', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'spending_category', label: 'Danh Mục Chi Tiêu', value_type: 'multi_select', options: ['dining', 'shopping', 'entertainment', 'travel', 'transport', 'bills', 'other'] },
+  { name: 'linked_bank_accounts_count', label: 'Số Bank Đã Liên Kết', value_type: 'number' },
+  { name: 'has_existing_loan', label: 'Đang Có Loan', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'has_existing_credit_card', label: 'Đang Có Thẻ Tín Dụng', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'has_existing_insurance', label: 'Đang Có Bảo Hiểm', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'dau', label: 'User Active Hôm Nay (DAU)', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'ctr_high', label: 'CTR Cao Hơn Ngưỡng TB', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'oao_click_history', label: 'Lịch Sử Click OAO', value_type: 'dropdown', options: ['exists', 'not_exists'] },
+  { name: 'activity_drop_detected', label: 'Phát Hiện Giảm Hoạt Động', value_type: 'dropdown', options: ['true', 'false'] },
+  { name: 'category_click_diversity', label: 'Độ Đa Dạng Category Click', value_type: 'dropdown', options: ['low', 'medium', 'high'] },
+]
+
+export const OPERATORS_BY_TYPE: Record<string, string[]> = {
+  text: ['=', '!=', 'contains', 'in', 'not_in', 'exists'],
+  number: ['=', '!=', '<', '<=', '>', '>=', 'in', 'not_in'],
+  dropdown: ['=', '!=', 'in', 'not_in'],
+  multi_select: ['in', 'not_in'],
+}
+
+export const OPERATOR_LABELS: Record<string, string> = {
+  '=': '= (bằng)',
+  '!=': '!= (khác)',
+  '<': '< (nhỏ hơn)',
+  '<=': '<= (nhỏ hơn hoặc bằng)',
+  '>': '> (lớn hơn)',
+  '>=': '>= (lớn hơn hoặc bằng)',
+  'in': 'in (thuộc tập hợp)',
+  'not_in': 'not in (không thuộc)',
+  'exists': 'exists (tồn tại)',
+  'contains': 'contains (chứa)',
+  'trend_up': 'trend_up (xu hướng tăng)',
+}

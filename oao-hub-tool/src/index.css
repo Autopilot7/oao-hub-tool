@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Tiptap editor styles */
+.ProseMirror {
+  outline: none;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #94a3b8;
+  pointer-events: none;
+  height: 0;
+}
+.ProseMirror ul, .ProseMirror ol {
+  padding-left: 1.25rem;
+}
+.ProseMirror ul { list-style-type: disc; }
+.ProseMirror ol { list-style-type: decimal; }
+.ProseMirror h2 { font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0 0.25rem; }
+.ProseMirror h3 { font-size: 1rem; font-weight: 600; margin: 0.5rem 0 0.25rem; }
+
+@layer base {
+  * {
+    @apply border-surface-200;
+  }
+  body {
+    @apply bg-surface-50 text-ink-900 font-sans text-sm antialiased;
+  }
+  h1 { @apply text-2xl font-bold text-ink-900; }
+  h2 { @apply text-lg font-semibold text-ink-900; }
+  h3 { @apply text-base font-semibold text-ink-700; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-700;
+  }
+  .btn-secondary {
+    @apply btn bg-surface-100 text-ink-700 border border-surface-300 hover:bg-surface-200;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  .btn-ghost {
+    @apply btn text-ink-500 hover:bg-surface-100 hover:text-ink-700;
+  }
+
+  .form-label {
+    @apply block text-xs font-medium text-ink-700 mb-1;
+  }
+  .form-input {
+    @apply w-full px-3 py-2 rounded-md border border-surface-300 text-sm text-ink-900 bg-white
+           placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           disabled:bg-surface-50 disabled:text-ink-500 transition-all;
+  }
+  .form-select {
+    @apply form-input appearance-none cursor-pointer;
+  }
+  .form-textarea {
+    @apply form-input resize-none;
+  }
+  .form-error {
+    @apply text-xs text-red-500 mt-1;
+  }
+  .char-count {
+    @apply text-xs text-ink-300 text-right mt-0.5;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-surface-200 shadow-sm;
+  }
+  .card-header {
+    @apply px-5 py-4 border-b border-surface-100 flex items-center justify-between;
+  }
+  .card-body {
+    @apply px-5 py-4;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-active {
+    @apply badge bg-green-50 text-green-700 ring-1 ring-green-200;
+  }
+  .badge-inactive {
+    @apply badge bg-surface-100 text-ink-500 ring-1 ring-surface-200;
+  }
+  .badge-draft {
+    @apply badge bg-yellow-50 text-yellow-700 ring-1 ring-yellow-200;
+  }
+  .badge-running {
+    @apply badge bg-blue-50 text-blue-700 ring-1 ring-blue-200;
+  }
+  .badge-paused {
+    @apply badge bg-orange-50 text-orange-700 ring-1 ring-orange-200;
+  }
+  .badge-completed {
+    @apply badge bg-purple-50 text-purple-700 ring-1 ring-purple-200;
+  }
+
+  .table-container {
+    @apply w-full overflow-x-auto;
+  }
+  .table {
+    @apply w-full text-sm;
+  }
+  .table thead tr {
+    @apply bg-surface-50 border-b border-surface-200;
+  }
+  .table th {
+    @apply px-4 py-3 text-left text-xs font-semibold text-ink-500 uppercase tracking-wide;
+  }
+  .table tbody tr {
+    @apply border-b border-surface-100 hover:bg-surface-50 transition-colors;
+  }
+  .table td {
+    @apply px-4 py-3 text-ink-700;
+  }
+
+  .section-divider {
+    @apply border-t border-surface-100 my-6;
+  }
+
+  .toggle {
+    @apply relative inline-flex h-5 w-9 items-center rounded-full transition-colors cursor-pointer;
+  }
+  .toggle-on { @apply bg-primary-600; }
+  .toggle-off { @apply bg-surface-300; }
+  .toggle-thumb {
+    @apply absolute h-3.5 w-3.5 rounded-full bg-white shadow transition-transform;
+  }
+
+  .tab-bar {
+    @apply flex border-b border-surface-200 gap-1;
+  }
+  .tab-item {
+    @apply px-4 py-2 text-sm font-medium text-ink-500 border-b-2 border-transparent cursor-pointer
+           hover:text-ink-700 hover:border-surface-300 transition-all;
+  }
+  .tab-item-active {
+    @apply tab-item text-primary-600 border-primary-600;
+  }
+}
