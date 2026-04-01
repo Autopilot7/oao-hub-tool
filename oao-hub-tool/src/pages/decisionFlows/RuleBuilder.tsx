@@ -137,7 +137,6 @@ function SortableRuleGroup({
   editMode,
 }: {
   group: RuleGroupObject
-  index: number
   onChange: (g: RuleGroupObject) => void
   onRemove: () => void
   editMode: boolean
