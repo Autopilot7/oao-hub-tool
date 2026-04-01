@@ -132,7 +132,6 @@ function ConditionRow({
 /** Sortable wrapper cho một RuleGroup card — dùng @dnd-kit */
 function SortableRuleGroup({
   group,
-  index,
   onChange,
   onRemove,
   editMode,
@@ -339,7 +338,6 @@ export function RuleBuilder({ ruleGroups, onChange, editMode }: RuleBuilderProps
             <SortableRuleGroup
               key={group.id}
               group={group}
-              index={i}
               onChange={(g) => updateGroup(i, g)}
               onRemove={() => removeGroup(i)}
               editMode={editMode}

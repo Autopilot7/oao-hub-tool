@@ -36,7 +36,6 @@ export const useExperimentStore = create<ExperimentStore>((set, get) => ({
       name: `${original.name} (Clone)`,
       status: 'draft',
       created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
     }
     set((state) => ({ experiments: [...state.experiments, cloned] }))
   },

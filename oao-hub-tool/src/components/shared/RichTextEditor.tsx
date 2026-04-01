@@ -57,7 +57,7 @@ export function RichTextEditor({ value, onChange, disabled, placeholder }: RichT
 
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value, false)
+      editor.commands.setContent(value, false, { preserveWhitespace: true })
     }
   }, [value, editor])
 

@@ -36,7 +36,7 @@ export const useBundleStore = create<BundleStore>((set, get) => ({
     const blocking = experiments.find(
       (e) =>
         (e.status === 'running' || e.status === 'paused') &&
-        e.variants.some((v) => v.bundle_id === id)
+        e.variants.some((v) => v.segment_bundle_id === id)
     )
     if (blocking) {
       return `Bundle đang được dùng bởi experiment "${blocking.name}" (${blocking.status}). Dừng experiment trước khi xoá.`

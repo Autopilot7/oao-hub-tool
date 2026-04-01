@@ -5,7 +5,7 @@ import { PageLayout } from '../../components/layout/PageLayout'
 import { Badge } from '../../components/shared/Badge'
 import { RuleBuilder } from '../decisionFlows/RuleBuilder'
 import { ConfirmDialog } from '../../components/shared/ConfirmDialog'
-import type { SegmentBundle, Category, BundleStatus } from '../../types'
+import type { SegmentBundle, Category } from '../../types'
 
 const EMPTY: SegmentBundle = {
   id: '', name: '', category: 'bank_account', description: '',
