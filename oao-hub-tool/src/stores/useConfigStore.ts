@@ -1,9 +1,12 @@
 import { create } from 'zustand'
 import type { MainConfiguration } from '../types'
 import { mockConfigurations } from '../mocks/configurations'
+import { useAuthStore } from './useAuthStore'
 
 interface ConfigStore {
   configs: MainConfiguration[]
+  /** Trả về configs đã filter theo role của currentUser */
+  visibleConfigs: () => MainConfiguration[]
   getById: (id: string) => MainConfiguration | undefined
   save: (config: MainConfiguration) => void
   add: (config: MainConfiguration) => void
@@ -12,6 +15,13 @@ interface ConfigStore {
 
 export const useConfigStore = create<ConfigStore>((set, get) => ({
   configs: mockConfigurations,
+
+  visibleConfigs: () => {
+    const user = useAuthStore.getState().currentUser
+    if (!user || user.role === 'admin' || user.role === 'po') return get().configs
+    // partner chỉ thấy configs của bank mình
+    return get().configs.filter((c) => c.bank_code === user.bank_code)
+  },
 
   getById: (id) => get().configs.find((c) => c.id === id),
 

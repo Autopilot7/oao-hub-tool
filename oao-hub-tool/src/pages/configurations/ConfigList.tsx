@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useConfigStore } from '../../stores/useConfigStore'
+import { useAuthStore } from '../../stores/useAuthStore'
 import { PageLayout } from '../../components/layout/PageLayout'
 import { Badge } from '../../components/shared/Badge'
 import { ConfirmDialog } from '../../components/shared/ConfirmDialog'
@@ -15,7 +16,10 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 export function ConfigList() {
-  const { configs, remove } = useConfigStore()
+  const { visibleConfigs, remove } = useConfigStore()
+  const configs = visibleConfigs()
+  const { currentUser } = useAuthStore()
+  const canDelete = currentUser?.role === 'admin'
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<ConfigStatus | ''>('')
@@ -92,8 +96,15 @@ export function ConfigList() {
               {filtered.map((c) => (
                 <tr key={c.id}>
                   <td>
-                    <p className="font-medium text-ink-900">{c.name}</p>
-                    <p className="text-xs text-ink-400 mt-0.5">{c.id}</p>
+                    {(() => {
+                      const [bankName, productDesc] = c.name.split('—').map((s) => s.trim())
+                      return (
+                        <>
+                          <p className="font-medium text-ink-900">{bankName}</p>
+                          {productDesc && <p className="text-[10px] text-ink-400">{productDesc}</p>}
+                        </>
+                      )
+                    })()}
                   </td>
                   <td className="font-mono text-xs font-medium text-primary-700 bg-primary-50/50 rounded">{c.bank_code}</td>
                   <td>{CATEGORY_LABELS[c.category]}</td>
@@ -105,9 +116,11 @@ export function ConfigList() {
                       <button className="btn-ghost text-xs" onClick={() => navigate(`/configurations/${c.id}`)}>
                         View
                       </button>
-                      <button className="btn-ghost text-xs text-red-500 hover:bg-red-50" onClick={() => setDeleteId(c.id)}>
-                        Delete
-                      </button>
+                      {canDelete && (
+                        <button className="btn-ghost text-xs text-red-500 hover:bg-red-50" onClick={() => setDeleteId(c.id)}>
+                          Delete
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

@@ -7,7 +7,7 @@ export const mockConfigurations: MainConfiguration[] = [
     name: 'Cathay United Bank',
     status: 'ACTIVE',
     category: 'bank_account',
-    extra_title: '<b>Ưu đãi mở tài khoản</b>',
+    extra_title: 'Ưu đãi mở tài khoản',
     hero_banner: {
       enabled: true,
       title: 'Mở tài khoản Cathay',

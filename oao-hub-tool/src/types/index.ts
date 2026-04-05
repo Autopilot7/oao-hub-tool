@@ -1,3 +1,16 @@
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+
+export type UserRole = 'admin' | 'po' | 'partner'
+
+export interface User {
+  id: string
+  email: string
+  name: string
+  role: UserRole
+  avatar: string       // initials
+  bank_code?: string   // chỉ role=partner mới có, dùng để filter configs
+}
+
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
 export type ConfigStatus = 'ACTIVE' | 'INACTIVE' | 'DRAFT'

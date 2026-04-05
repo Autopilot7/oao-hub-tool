@@ -13,12 +13,10 @@ function evaluateFlow(flow: DecisionFlow, input: TryRuleInput) {
       fact: c.fact_name,
       operator: c.operator,
       value: Array.isArray(c.value) ? c.value.join(', ') : String(c.value),
-      // Simulate: just randomly pass conditions for demo, except known ones
       passed: c.enabled && (() => {
         if (c.fact_name === 'Platform' && c.operator === '=') return input.platform === c.value
         if (c.fact_name === 'Os' && c.operator === '=') return input.os === c.value
         if (c.fact_name === 'App version') return true
-        // Random for demo with bias toward passing
         return Math.random() > 0.35
       })(),
     }))

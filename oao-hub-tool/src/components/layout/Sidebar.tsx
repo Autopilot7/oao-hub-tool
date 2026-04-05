@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/useAuthStore'
 
 const NAV = [
   {
@@ -11,6 +12,16 @@ const NAV = [
         icon: (
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        ),
+      },
+      {
+        to: '/analytics',
+        label: 'Analytics',
+        desc: 'Performance metrics',
+        icon: (
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         ),
       },
@@ -58,7 +69,21 @@ const NAV = [
   },
 ]
 
+const ROLE_BADGE: Record<string, string> = {
+  admin: 'Admin',
+  po: 'PO',
+  partner: 'Partner',
+}
+
 export function Sidebar() {
+  const { currentUser, logout } = useAuthStore()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
   return (
     <aside className="w-56 shrink-0 h-screen sticky top-0 border-r border-surface-200 bg-white flex flex-col">
       <div className="px-4 py-4 border-b border-surface-100">
@@ -105,13 +130,27 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="px-4 py-3 border-t border-surface-100">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center">
-            <span className="text-primary-700 text-[10px] font-bold">A</span>
+      <div className="px-3 py-3 border-t border-surface-100 space-y-2">
+        {currentUser && (
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-primary-100 flex items-center justify-center shrink-0">
+              <span className="text-primary-700 text-[9px] font-bold">{currentUser.avatar}</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-medium text-ink-700 truncate leading-tight">{currentUser.name}</p>
+              <p className="text-[9px] text-ink-400 truncate">{ROLE_BADGE[currentUser.role]}</p>
+            </div>
           </div>
-          <span className="text-xs text-ink-500 truncate">admin@zalopay.vn</span>
-        </div>
+        )}
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs text-ink-500 hover:bg-red-50 hover:text-red-600 transition-colors"
+        >
+          <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Sign out
+        </button>
       </div>
     </aside>
   )
